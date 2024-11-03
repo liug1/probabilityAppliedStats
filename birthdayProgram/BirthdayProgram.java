@@ -5,15 +5,12 @@ import java.util.Random;
 
 public class BirthdayProgram {
 	
-	private ArrayList<Person> classmates = new ArrayList<Person>();
-	
-	private int sameBirthdayCount;
+	private ArrayList<Person> classmates;
 	private int classSize;
 	
 	public void fillClassmates(int userInputSize) {
-		
 		Random rng = new Random();
-		
+		classmates = new ArrayList<>();
 		classSize = userInputSize;
 		
 		for (int i = 0; i < classSize; i++) {
@@ -22,29 +19,24 @@ public class BirthdayProgram {
 		}
 	}
 	
-	public void printClassmates() {
-		
-		for (int i = 0; i < classmates.size(); i++) {
-			System.out.println(classmates.get(i).birthday);
-		}
-	}
-	
-	public void sameBirthdayCounter() {
-		
+	public boolean sameBirthdayCheck() {
 		for (int i = 0; i < classmates.size(); i++) {
 			for (int j = i+1; j < classmates.size(); j++) {
 				if (classmates.get(i).birthday == (classmates.get(j).birthday) == true)
-					sameBirthdayCount++;
+					return true;
 			}
 		}
-		System.out.println("Same birthday count: " + sameBirthdayCount);
+		return false;
 	}
 	
-	public void findProbability() {
-		
-		System.out.println("Probability: " + (double)sameBirthdayCount / classmates.size());
-	}
-	
-	public void run() {
+	public void run(int userInputSize, int userInputTrials) {
+		int count = 0;
+		for (int i = 0; i < userInputTrials; i++) {
+			fillClassmates(userInputSize);
+			if (sameBirthdayCheck()) {
+				count++;
+			}
+		}
+		System.out.println("Probability: " + (double)count / userInputTrials);
 	}
 }
