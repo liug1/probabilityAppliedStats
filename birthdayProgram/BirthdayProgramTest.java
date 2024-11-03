@@ -6,8 +6,6 @@ public class BirthdayProgramTest {
 		
 		BirthdayProgram Test = new BirthdayProgram();
 		
-		// Need User Input for Class Size and Number of Runs
 		Test.run(30, 10000);
-
 	}
 }
